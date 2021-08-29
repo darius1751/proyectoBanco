@@ -3,9 +3,10 @@ const cors = require('cors');
 const morgan = require('morgan');
 const userRouters = require('./routers/userRouters.js');
 const transactionRouters = require('./routers/transactionsRouters');
+const accountRouters = require('./routers/accoutRouters');
 function Server(){
     const app = express();
-    const init = ()=>{
+    this.init = ()=>{
         app.listen(app.get('port'),()=>{
             console.log('Server on port ',app.get('port'));
         });
@@ -19,9 +20,10 @@ function Server(){
     const configRouters = ()=>{
         app.use('/user',userRouters());
         app.use('/transaction',transactionRouters());
-    }
+        app.use('/account',accountRouters());
+    };
     config();
     configRouters();
-    init();
 };
 const server = new Server();
+server.init();

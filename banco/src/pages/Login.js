@@ -1,15 +1,26 @@
-import React,{useState} from 'react';
-import {Button,Input} from '@material-ui/core';
+import React,{useState,useEffect} from 'react';
+import {Input} from '@material-ui/core';
+import { helpHttp } from '../helpers/helpHttp';
+import { useHistory } from 'react-router-dom';
 const initialData = {
-    user:'',
+    identification:'',
     password:''
 }
 
-const Login = ()=>{
+const Login = ({setUser,user})=>{
     const [data,setData] = useState(initialData);
+    const [loading,setLoading] = useState(false);
+    const history = useHistory();
+    useEffect(() => {
+        if(user)
+            history.push(`/user/${user.name}`);
+        return () => {
+            
+        };
+    }, [user,history]);
     const handleChange = (e)=>{
         if(e.target.name === 'password'){
-            console.log(e.nativeEvent.data);
+            
         }
         setData({
             ...data,
@@ -18,17 +29,21 @@ const Login = ()=>{
     }
     const login = (e)=>{
         e.preventDefault();
+        helpHttp().post('http://localhost:4000/user/login',{body:data,headers:{"content-type":"application/json"}})
+        .then(value=>{
+            if(value.id)
+                setUser(value);
+        });
     }
     return (
-        <div >
-            <form  noValidate autoComplete="off" onSubmit={login}  className='form'>
-                <Input placeholder='Ingrese su numero de identificacion' inputProps={{ 'aria-label': 'description' }} type='number' value={data.user} onChange={handleChange} name='user'/>
+        <div className='login'>
+            <h2>Login</h2>
+            <form  noValidate autoComplete="off" onSubmit={login}>
+                <Input placeholder='Ingrese su numero de identificacion' inputProps={{ 'aria-label': 'identification' }} type='number' value={data.identification} onChange={handleChange} name='identification'/>
                 <br/>
-                <Input placeholder='Ingrese su contraseña' inputProps={{ 'aria-label': 'description' }} type='password' value={data.password} onChange={handleChange} name='password'/>
+                <Input placeholder='Ingrese su contraseña' inputProps={{ 'aria-label': 'password' }} type='password' value={data.password} onChange={handleChange} name='password'/>
                 <br/>
-                <Button variant="contained" color="primary">
-                    Inicio de session
-                </Button>
+                <Input type='submit' color='primary' style={{background:'red',marginTop:'2rem'}}>Iniciar Session</Input>
             </form>
         </div>
     );

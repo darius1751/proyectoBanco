@@ -1,25 +1,19 @@
-const AccountModel = require('../models/AccountModel');
+const conexion = require('../db/conexion');
 const AccountController = ()=>{
-    const getAll = (req,res)=>{
-        res.send({message:'Funciona'});
-    }
-    const login = (req,res)=>{
-        const {identification,password} = req.body;
-        const user = new UserModel(identification,password);
-        res.send(user);
-    }
-    const getId = (req,res)=>{
-        res.send({data:req.params.id});
-    }
-    const post = (req,res)=>{
-
+    const getByUserId = async (req,res)=>{
+        const connection = await conexion();
+        const {id} = req.params;
+        const results = await connection.query('SELECT id,cash FROM account WHERE client_id = ?',[id]);
+        res.send(results);
     };
-    const del = (req,res)=>{
-
+    const putCash = async (req,res)=>{
+        const connection = await conexion();
+        const {id} = req.params;
+        const {cash} = req.body;
+        connection.query('UPDATE account SET cash = ? WHERE id = ?',[cash,id]);
     }
-    
     return {
-       getAll,getId,post,del,login
+        getByUserId,putCash
     };
 }
 module.exports = AccountController();

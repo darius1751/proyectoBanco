@@ -3,14 +3,15 @@ USE prueba_banco_cognox;
 CREATE TABLE client(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     identification VARCHAR(11) NOT NULL UNIQUE,
-    password TINYINT(4) NOT NULL UNIQUE,
-    cash FLOAT NOT NULL DEFAULT 0 CHECK(cash>=0)
+    name VARCHAR(125) NOT NULL,
+    password SMALLINT NOT NULL
 );
 
 CREATE TABLE account
 (
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    client_id INT NOT NULL REFERENCES client(id)
+    client_id INT NOT NULL REFERENCES client(id),
+    cash FLOAT NOT NULL DEFAULT 0 CHECK(cash>=0)
 );
 ALTER TABLE account ADD FOREIGN KEY(client_id) REFERENCES client(id);
 CREATE TABLE transactions

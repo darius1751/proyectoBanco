@@ -9,7 +9,7 @@ const Nav = ({name,setUser})=>{
                 </NavLink>
             </div>
             <div className='link'>
-                <NavLink to={`/user/${name}/transferir`} activeClassName='active-nav' exact>
+                <NavLink to={`/transferir`} activeClassName='active-nav' exact>
                     Transferir
                 </NavLink>
             </div>

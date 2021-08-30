@@ -7,9 +7,9 @@ const initialData = {
     password:''
 }
 
-const Login = ({setUser,user})=>{
+const Login = ({setUser,user,setLoading})=>{
     const [data,setData] = useState(initialData);
-    const [loading,setLoading] = useState(false);
+    
     const history = useHistory();
     useEffect(() => {
         if(user)
@@ -29,10 +29,12 @@ const Login = ({setUser,user})=>{
     }
     const login = (e)=>{
         e.preventDefault();
+        setLoading(true);
         helpHttp().post('http://localhost:4000/user/login',{body:data,headers:{"content-type":"application/json"}})
         .then(value=>{
             if(value.id)
                 setUser(value);
+            setLoading(false);                
         });
     }
     return (

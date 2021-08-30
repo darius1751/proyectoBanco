@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory, useParams,Route} from 'react-router-dom';
+import { useHistory, useParams} from 'react-router-dom';
 import Nav from '../components/Nav';
 const User = ({user,setUser}) => {
     const {name} = useParams();

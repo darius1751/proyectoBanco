@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import {Input} from '@material-ui/core';
 import { helpHttp } from '../helpers/helpHttp';
 import { useHistory } from 'react-router-dom';
 const initialData = {
@@ -13,15 +12,15 @@ const Login = ({setUser,user,setLoading})=>{
     const history = useHistory();
     useEffect(() => {
         if(user)
-            history.push(`/user/${user.name}`);
+            history.push(`/user/${user.name}`);    
         return () => {
             
         };
     }, [user,history]);
+    
+        
     const handleChange = (e)=>{
-        if(e.target.name === 'password'){
-            
-        }
+        
         setData({
             ...data,
             [e.target.name]:e.target.value
@@ -34,18 +33,18 @@ const Login = ({setUser,user,setLoading})=>{
         .then(value=>{
             if(value.id)
                 setUser(value);
-            setLoading(false);                
+            setLoading(false);
         });
     }
     return (
         <div className='login'>
             <h2>Login</h2>
             <form  noValidate autoComplete="off" onSubmit={login}>
-                <Input placeholder='Ingrese su numero de identificacion' inputProps={{ 'aria-label': 'identification' }} type='number' value={data.identification} onChange={handleChange} name='identification'/>
+                <input placeholder='Ingrese su numero de identificacion'  type='number' value={data.identification} onChange={handleChange} name='identification' min='1'/>
                 <br/>
-                <Input placeholder='Ingrese su contraseña' inputProps={{ 'aria-label': 'password' }} type='password' value={data.password} onChange={handleChange} name='password'/>
+                <input placeholder='Ingrese su contraseña'  type='password' value={data.password} onChange={handleChange} name='password' minLength='4' maxLength='4'/>
                 <br/>
-                <Input type='submit' color='primary' style={{background:'red',marginTop:'2rem'}}>Iniciar Session</Input>
+                <input type='submit' className="waves-effect waves-light btn"/>
             </form>
         </div>
     );

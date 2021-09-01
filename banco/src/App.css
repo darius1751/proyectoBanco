@@ -37,7 +37,7 @@
   }
 }
 .login input{
-  width: 500px;
+  width: 75%;
   margin:1rem;
 }
 .login{
@@ -50,19 +50,18 @@ header>a{
   margin:2rem;
 }
 header{
-  position:fixed;
   text-align: center;
   background-color: #61dafb;
 }
 .link,.link-logout{
-  display: inline-block;
+  display: inline;
   margin-right:.5rem;
   height: 80%;
   border-radius: .5rem;
   margin-top: .5rem;
-  background-color: #282c34;
   padding-left:2rem;  
   float:left;
+  background-color: #282c34;
 }
 .link-logout{
   float:right;
@@ -80,4 +79,7 @@ form{
 }
 .active-nav{
   color:green;
+}
+input[type='submit']{
+  width:75%;
 }

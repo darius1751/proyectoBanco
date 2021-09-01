@@ -11,17 +11,18 @@ function App() {
   const [loading,setLoading] = useState(false);
   return (
     <div>
+      
       <HashRouter>
           <Switch>
             <Route path='/' exact>
               <Redirect to='/Login'/>
             </Route>
             <Route path='/Login' exact> 
-              <Login setUser = {setUser} user={user} setLoading={setLoading}/>
+              <Login setUser={setUser} user={user} setLoading={setLoading}/>
             </Route>
             <Route path='/user/:name'> 
               {loading && <Loader/>}
-              {user?<User user={user} setUser ={setUser}/>:<Redirect to='/Login'/>}
+              {user?<User user={user} setUser={setUser}/>:<Redirect to='/Login'/>}
             </Route>
             <Route path='/transferir'>
               {loading && <Loader/>}

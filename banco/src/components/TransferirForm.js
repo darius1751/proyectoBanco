@@ -1,22 +1,16 @@
-import React,{useState} from 'react';
-import { helpHttp } from '../helpers/helpHttp';
-const initialAccount = [];
+import React from 'react';
 const TransferirForm = ({user}) => {
-    const [accounts, setAccounts] = useState(initialAccount);
-        helpHttp().get(`http://localhost:4000/account/${user.id}`,{headers:{"content-type":"application/json"}}).then(value=>{
-            setAccounts(value);
-        });
-    console.log(accounts);
+    console.log(user);
+    const {accounts} = user;
     return (
         <div>
-            <form style={{color:'red',backgroundColor:'black'}}>
+            <form>
                 <select>
-                    {(accounts.length <= 0)?<option>Sin Cuentas</option>:
-                        accounts.map((value)=>{
-                            return <option key={Date.now()+value.id} value={value.id}>{value.id} - {value.cash}</option>
-                        })
-                    }
+                    {accounts.lenght <= 0?<option>No tiene Cuentas</option>:accounts.map((account)=>
+                        <option key={account.id+'Id'} value={account.id} >{account.id} - {account.cash}</option>
+                    )}
                 </select>
+                <input type='number' placeholder='Ingrese la cantidad de dinero a transferir' min='1' step='0.01'/>
             </form>
         </div>
     );

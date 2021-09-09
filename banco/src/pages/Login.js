@@ -40,11 +40,11 @@ const Login = ({setUser,user,setLoading})=>{
         <div className='login'>
             <h2>Login</h2>
             <form  noValidate autoComplete="off" onSubmit={login}>
-                <input placeholder='Ingrese su numero de identificacion'  type='number' value={data.identification} onChange={handleChange} name='identification' min='1'/>
+                <input placeholder='Ingrese su numero de identificacion'  type='number' value={data.identification} onChange={handleChange} name='identification' min='1' className='text'/>
                 <br/>
-                <input placeholder='Ingrese su contraseña'  type='password' value={data.password} onChange={handleChange} name='password' minLength='4' maxLength='4'/>
+                <input placeholder='Ingrese su contraseña'  type='password' value={data.password} onChange={handleChange} name='password' minLength='4' maxLength='4' className='text'/>
                 <br/>
-                <input type='submit' className="waves-effect waves-light btn"/>
+                <input type='submit' className="submit"/>
             </form>
         </div>
     );
